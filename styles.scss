@@ -8,8 +8,13 @@ body {
   text-align: center;
   justify-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: end;
+  height: 97vh;
   width: 100vw;
+
+  h1 {
+    font-size: 3rem;
+  }
 
   main {
     display: flex;
@@ -17,5 +22,41 @@ body {
     align-items: center;
     justify-content: center;
 
+    #alienShipFleet {
+      display: flex;
+      height: fit-content;
+      width: 90vw;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+      .alienShips {
+        border: 2px solid #101010;
+        border-radius: 2rem;
+        padding: 1.5rem;
+      }
+    }
+    button {
+      margin-top: 10rem;
+      height: 3rem;
+      width: 10rem;
+      justify-content: center;
+      align-items: center;
+      font-weight: bolder;
+      border-color: #b05b27;
+      border-radius: 0.25rem;
+      font-size: larger;
+    }
+
+    .hide {
+      display: none;
+    }
+    .show {
+      display: flex;
+    }
+  }
+
+  footer {
+    align-items: baseline;
   }
 }
