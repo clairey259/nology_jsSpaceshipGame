@@ -1,5 +1,5 @@
-import { testFunc } from "./base";
+// import { testFunc } from "./base";
 
-it("test description", () => {
-    expect(testFunc()).toBe("answer");
-});
+// it("test description", () => {
+//     expect(testFunc()).toBe("answer");
+// });
