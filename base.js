@@ -13,6 +13,9 @@ const newGameButton = document.getElementById("newGameButton");
 fireButton.className = "show";
 newGameButton.className = "hide";
 
+//Global variables
+let shipArr = []
+
 //create alient ship object
 class BasicShip {
   constructor(initialHitPoints, hitpointsLost, name) {
@@ -22,25 +25,23 @@ class BasicShip {
     this.name = name;
   } 
 
-  render() {
-    
-  }
-
-  spawn(amount) {          
-    for (let i = 0; i < amount; i++) {
-      const text = `<p class="alienShips">${this.name} ${this.currentHitPoints}</p>`;
-      alienShipFleet.innerHTML += text;
-    }
-    return alienShipFleet.innerHTML;
-  }
-
-  hit() {
-    this.currentHitPoints = this.initialHitPoints - this.hitpointsLost;
+  renderToHTML() {
     const text = `<p class="alienShips">${this.name} ${this.currentHitPoints}</p>`;
-    alienShipFleet.innerHTML = text;
+      alienShipFleet.innerHTML += text;
+      return alienShipFleet.innerHTML;
+  }
+
+  reduceHitPoints() {
+    if (this.currentHitPoints > 0){}
+    this.currentHitPoints = this.currentHitPoints - this.hitpointsLost;
+    this.renderToHTML()
     return this.currentHitPoints;
   }
- 
+
+  addToShipArr() {
+    shipArr.push(this)
+    return shipArr
+  }
 }
 
 //create types of alien ships
@@ -48,21 +49,34 @@ const defenceShip = new BasicShip(80, 10, "DefenseShip");
 const attackShip = new BasicShip(45, 12, "AttackShip");
 const motherShip = new BasicShip(100, 9, "MotherShip");
 
-//create fleet
-defenceShip.spawn(5);
-attackShip.spawn(8);
-motherShip.spawn(1);
+//render multiple ships
+  for (let i = 0; i < 5; i++){
+    defenceShip.addToShipArr()
+    defenceShip.renderToHTML()
+  }
 
-//access all ships
-const alienShips = document.getElementsByClassName("alienShips");
+  for (let i = 0; i < 8; i++){
+    attackShip.addToShipArr()
+    attackShip.renderToHTML()
+  } 
 
-console.dir(alienShips[4].currentHitPoints)
-console.dir(alienShips.length)
-console.dir(alienShips[3])
-console.dir(alienShips[5])
+  motherShip.addToShipArr
+  motherShip.renderToHTML()
+  
+
+console.log(shipArr)
+
+//random ship selector
+const randomShip = Math.floor(Math.random() * shipArr.length);
+
 
 //destroy ships
-fireButton.addEventListener("click", defenceShip.hit);
+fireButton.addEventListener("click", () => {
+  shipObject = shipArr[randomShip];
+  shipObject.reduceHitPoints()
+  console.log(shipArr)
+  return shipArr
+})
 
 //EndGame
 if (
