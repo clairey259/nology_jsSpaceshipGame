@@ -1,3 +1,6 @@
+//import ship object
+import {BasicShip} from "./ship"
+
 //get HTML elements
 const alienShipFleet = document.getElementById("alienShipFleet");
 const fireButton = document.getElementById("fireButton");
@@ -11,28 +14,7 @@ newGameButton.className = "hide";
 //Global variables
 let shipArr = [];
 
-//create alient ship object
-class BasicShip {
-  constructor(initialHitPoints, hitpointsLost, name) {
-    this.initialHitPoints = initialHitPoints;
-    this.hitpointsLost = hitpointsLost;
-    this.currentHitPoints = initialHitPoints;
-    this.name = name;
-  }
-
-  renderToHTML() {
-    const text = `<p class="alienShips">${this.name} ${this.currentHitPoints}</p>`;
-    return text;
-  }
-
-  reduceHitPoints() {
-    this.currentHitPoints = this.currentHitPoints - this.hitpointsLost;
-    if (this.currentHitPoints < 0) {
-      this.currentHitPoints = 0;
-    }
-  }
-}
-
+//render ships to HTML
 function renderArrToHTML() {
   alienShipFleet.innerHTML = "";
   shipArr.forEach((element) => {

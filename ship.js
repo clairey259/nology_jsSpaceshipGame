@@ -1,17 +1,21 @@
-//create alient ship object
+//create alien ship object
 export class BasicShip {
-    constructor(name, initialHitpoints) {
-        this.name = name
-        this.initialHitpoints = initialHitpoints
-    } 
+    constructor(initialHitPoints, hitpointsLost, name) {
+      this.initialHitPoints = initialHitPoints;
+      this.hitpointsLost = hitpointsLost;
+      this.currentHitPoints = initialHitPoints;
+      this.name = name;
+    }
   
-    // render() {
-      
-    // }
+    renderToHTML() {
+      const text = `<p class="alienShips">${this.name} ${this.currentHitPoints}</p>`;
+      return text;
+    }
   
-    // hit() {
-
-    // }
-   
+    reduceHitPoints() {
+      this.currentHitPoints = this.currentHitPoints - this.hitpointsLost;
+      if (this.currentHitPoints < 0) {
+        this.currentHitPoints = 0;
+      } return this.currentHitPoints
+    }
   }
-  
