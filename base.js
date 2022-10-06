@@ -1,8 +1,8 @@
-
 //get HTML elements
 const alienShipFleet = document.getElementById("alienShipFleet");
 const fireButton = document.getElementById("fireButton");
 const newGameButton = document.getElementById("newGameButton");
+const message = document.getElementById("message")
 
 //set visability of buttons
 fireButton.className = "show";
@@ -21,58 +21,52 @@ class BasicShip {
   }
 
   renderToHTML() {
-    alienShipFleet.innerHTML = "";
-    shipArr.forEach((element) => {
-      const text = `<p class="alienShips">${element.name} ${element.currentHitPoints}</p>`;
-      alienShipFleet.innerHTML += text;
-    });
-
-    return alienShipFleet.innerHTML;
+    const text = `<p class="alienShips">${this.name} ${this.currentHitPoints}</p>`;
+    return text;
   }
 
   reduceHitPoints() {
-    if (this.currentHitPoints > 0) {
-    }
     this.currentHitPoints = this.currentHitPoints - this.hitpointsLost;
-    this.renderToHTML();
-    return this.currentHitPoints;
-  }
-
-  addToShipArr() {
-    shipArr.push(this);
-    return shipArr;
+    if (this.currentHitPoints < 0) {
+      this.currentHitPoints = 0;
+    }
   }
 }
 
-//create types of alien ships
-const defenceShip = new BasicShip(80, 10, "DefenseShip");
-const attackShip = new BasicShip(45, 12, "AttackShip");
-const motherShip = new BasicShip(100, 9, "MotherShip");
+function renderArrToHTML() {
+  alienShipFleet.innerHTML = "";
+  shipArr.forEach((element) => {
+    alienShipFleet.innerHTML += element.renderToHTML();
+  });
+  return alienShipFleet.innerHTML;
+}
 
 //render multiple ships
 for (let i = 0; i < 5; i++) {
-  defenceShip.addToShipArr();
-  defenceShip.renderToHTML();
+  const defenceShip = new BasicShip(80, 10, "DefenseShip");
+  shipArr.push(defenceShip);
 }
 
 for (let i = 0; i < 8; i++) {
-  attackShip.addToShipArr();
-  attackShip.renderToHTML();
+  const attackShip = new BasicShip(45, 12, "AttackShip");
+  shipArr.push(attackShip);
 }
 
-motherShip.addToShipArr();
-motherShip.renderToHTML();
+const motherShip = new BasicShip(100, 9, "MotherShip");
+shipArr.push(motherShip);
+
+renderArrToHTML();
 
 //destroy ships
 fireButton.addEventListener("click", () => {
-  const randomShipSelector = Math.floor(Math.random() * shipArr.length);
-  console.log(randomShipSelector);
-  shipObject = shipArr[randomShipSelector];
-  console.log(shipObject);
-  shipObject.reduceHitPoints();
-  console.log("hit");
+  let shipObject = null
+  while (shipObject == null || shipObject.currentHitPoints <= 0){
+    const randomShipSelector = Math.floor(Math.random() * shipArr.length);
+    shipObject = shipArr[randomShipSelector];
+  }
+  shipObject.reduceHitPoints();;
+  renderArrToHTML();
   endGame();
-  return shipArr;
 });
 
 //EndGame
@@ -80,13 +74,7 @@ function endGame() {
   if (motherShip.currentHitPoints == 0) {
     fireButton.className = "hide";
     newGameButton.className = "show";
-  } else if (
-    defenceShip.currentHitPoints <= 0 &&
-    attackShip.currentHitPoints <= 0 &&
-    motherShip.currentHitPoints <= 0
-  ) {
-    fireButton.className = "hide";
-    newGameButton.className = "show";
+    message.innerText = "GAME OVER"
   }
 }
 

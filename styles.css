@@ -52,6 +52,11 @@ body main .hide {
 body main .show {
   display: flex;
 }
+body main #message {
+  color: #b02727;
+  font-size: 2rem;
+  font-weight: bolder;
+}
 body footer {
   align-items: baseline;
 }
