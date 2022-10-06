@@ -33,6 +33,7 @@ body main #alienShipFleet .alienShips {
   border: 2px solid #101010;
   border-radius: 2rem;
   padding: 1.5rem;
+  width: 6rem;
 }
 body main button {
   margin-top: 10rem;
