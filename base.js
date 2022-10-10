@@ -1,5 +1,5 @@
 //import ship object
-import {BasicShip} from "./ship"
+import {BasicShip} from "./ship.js"
 
 //get HTML elements
 const alienShipFleet = document.getElementById("alienShipFleet");
