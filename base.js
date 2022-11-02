@@ -1,5 +1,7 @@
-//import ship object
-import {BasicShip} from "./ship.js"
+//import ship objects
+import { DefenceShip } from "./ship.js";
+import { AttackShip } from "./ship.js";
+import { MotherShip } from "./ship.js";
 
 //get HTML elements
 const alienShipFleet = document.getElementById("alienShipFleet");
@@ -25,16 +27,13 @@ function renderArrToHTML() {
 
 //render multiple ships
 for (let i = 0; i < 5; i++) {
-  const defenceShip = new BasicShip(80, 10, "DefenseShip");
-  shipArr.push(defenceShip);
+  shipArr.push(new DefenceShip());
 }
 
 for (let i = 0; i < 8; i++) {
-  const attackShip = new BasicShip(45, 12, "AttackShip");
-  shipArr.push(attackShip);
+  shipArr.push(new AttackShip());
 }
-
-const motherShip = new BasicShip(100, 9, "MotherShip");
+const motherShip = new MotherShip()
 shipArr.push(motherShip);
 
 renderArrToHTML();
