@@ -1,4 +1,4 @@
-import { BasicShip } from "./ship";
+import { BasicShip } from "./ship.js";
 
 describe("BasicShip", () => {
   it("is defined", () => {
